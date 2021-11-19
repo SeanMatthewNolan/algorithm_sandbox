@@ -1,1 +1,1 @@
-from .newton_raphson import NewtonRaphsonScalar
+from .newton_raphson import NewtonRaphsonScalar, DampedNewtonScalar, BoundedNewtonScalar
