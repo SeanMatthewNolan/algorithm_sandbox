@@ -20,9 +20,8 @@ stream.setFormatter(stream_formatter)
 test_logger.addHandler(stream)
 
 
-@pytest.mark.parametrize('timer, logger',
-                         [(Timer, None), (PerfTimer, None), (ProcessTimer, None), (Timer, test_logger),
-                          (TimerNS, None), (PerfTimerNS, None), (ProcessTimerNS, None)])
+@pytest.mark.parametrize('timer', [Timer, PerfTimer, ProcessTimer, Timer, TimerNS, PerfTimerNS, ProcessTimerNS])
+@pytest.mark.parametrize('logger', [None, test_logger])
 def test_timers(timer, logger):
     with timer(logger=logger, logging_level=LOG_LEVEL, log_prefix='test_timer:'):
         _ = sum([i for i in range(1_000_000)])
