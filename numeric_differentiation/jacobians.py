@@ -67,8 +67,9 @@ def multi_saddle(x, y):
     return np.array([x[0] * y[0]**2 - y[1], -x[1] * y[1]**2 + y[0]])
 
 
-jac = CentralDiffJac(saddle)
-print(jac(np.array([10., 10.])))
+if __name__ == '__main__':
+    jac = CentralDiffJac(saddle)
+    print(jac(np.array([10., 10.])))
 
-jac2 = CentralDiffJac(multi_saddle, arg_idx=1)
-print(jac2(np.array([1., 1.]), np.array([10., 10.])))
+    jac2 = CentralDiffJac(multi_saddle, arg_idx=1)
+    print(jac2(np.array([1., 1.]), np.array([10., 10.])))

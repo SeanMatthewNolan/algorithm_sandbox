@@ -24,5 +24,5 @@ class BVPSolver(ABC):
         pass
 
     @abstractmethod
-    def solve(self, dy_dt, bc_0, bc_f, guess):
+    def solve(self, dy_dt, bc, guess):
         pass
