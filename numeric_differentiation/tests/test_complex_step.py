@@ -1,5 +1,4 @@
 from cmath import sin, cos, exp
-from itertools import product
 from typing import Tuple, Callable
 
 import pytest
@@ -16,7 +15,8 @@ examples = [
 ]
 
 
-@pytest.mark.parametrize('diff_class, example', product(scalar_diff_funcs, examples))
+@pytest.mark.parametrize('example', examples)
+@pytest.mark.parametrize('diff_class', scalar_diff_funcs)
 def test_complex_step(diff_class: NumDiff, example: Tuple[Callable, Callable, complex]):
     f, df_dx, x = example
     num_df_dx = diff_class(f)
