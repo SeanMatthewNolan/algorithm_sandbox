@@ -12,7 +12,7 @@ class ExplicitRKStep(RKStep, ABC):
         step = 0
         t_arr = []
         y_arr = []
-        for j, (a_j, b_j, c_j) in enumerate(zip(self.a, self.b, self.c)):
+        for j, (a_j, b_j, c_j) in enumerate(zip(self.a_mat, self.b, self.c)):
             t_j = t_0 + h * c_j
             y_j = y_0
 
@@ -33,7 +33,7 @@ class ExplicitRKStep(RKStep, ABC):
 
 
 class Euler(ExplicitRKStep):
-    a = np.array([[0.]])
+    a_mat = np.array([[0.]])
     b = np.array([1.])
 
 
@@ -44,7 +44,7 @@ class Midpoint(ExplicitRKStep):
     """
     pg. 499 of "A First Course in Numerical Methods" by Ascher and Greif
     """
-    a = np.array([
+    a_mat = np.array([
         [0.,  0.],
         [1/2, 0.]
     ])
@@ -55,7 +55,7 @@ class Heun(ExplicitRKStep):
     """
     https://en.wikipedia.org/wiki/Heun%27s_method#Runge.E2.80.93Kutta_method
     """
-    a = np.array([
+    a_mat = np.array([
         [0., 0.],
         [1., 0.]
     ])
@@ -67,7 +67,7 @@ class Ralston(ExplicitRKStep):
     https://en.wikipedia.org/wiki/Heun%27s_method#Runge.E2.80.93Kutta_method
     Minimizes truncation error
     """
-    a = np.array([
+    a_mat = np.array([
         [0., 0.],
         [2/3., 0.]
     ])
@@ -78,7 +78,7 @@ class Ralston(ExplicitRKStep):
 
 
 class RK4(ExplicitRKStep):
-    a = np.array([
+    a_mat = np.array([
         [0.,  0.,  0., 0.],
         [1/2, 0.,  0., 0.],
         [0.,  1/2, 0., 0.],
@@ -88,7 +88,7 @@ class RK4(ExplicitRKStep):
 
 
 class ThreeEighthsRK4(ExplicitRKStep):
-    a = np.array([
+    a_mat = np.array([
         [0.,    0., 0., 0.],
         [1/3,   0., 0., 0.],
         [-1/3,  1., 0., 0.],
