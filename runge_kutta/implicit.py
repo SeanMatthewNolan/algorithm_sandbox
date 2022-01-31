@@ -7,6 +7,19 @@ from shared_utils.constants import EMPTY_ARRAY, EMPTY_ARRAY_2D
 
 
 class ImplicitRK(RKStep, ABC):
+    """
+    Butcher - 2016 - NUMERICAL METHODS FOR ORDINARY DIFFERENTIAL EQUATIONS - pg 98
+
+     c | A
+    ----------
+       | b^T
+
+    A - dependence of the stages on the derivatives found at other stages
+    b - vector of quadrature weights
+    c - positions within step
+
+    """
+
     def compute_error(self, t, y, f):
         pass
 
@@ -26,7 +39,7 @@ class MIRK(ImplicitRK, ABC):
         diff_sum = 0
         for b_r, c_r, v_r, x_r in zip(self.b, self.c, self.v, self.x_mat):
             t_r = t[0] + h * c_r
-            y_r = (1 - v_r) * y[0] + v_r * y[-1] + h * sum(x_rj * k_j for x_rj, k_j in zip(x_r, k))
+            y_r = (1. - v_r) * y[0] + v_r * y[-1] + h * sum(x_rj * k_j for x_rj, k_j in zip(x_r, k))
             k.append(f(t_r, y_r))
             diff_sum += b_r * k[-1]
 
